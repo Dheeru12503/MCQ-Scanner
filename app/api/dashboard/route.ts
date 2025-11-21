@@ -10,9 +10,9 @@ export async function GET(request: NextRequest) {
         const userId = getUserIdFromRequest(request) || 'test-user-id';
 
         // Uncomment below to enable auth check
-        // if (!userId) {
-        //     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-        // }
+        if (!userId) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
 
         await connectDB();
 

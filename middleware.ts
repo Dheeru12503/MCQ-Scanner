@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { verifyToken } from '@/lib/auth';
+import { verifyTokenEdge } from '@/lib/auth.edge';
 
 export function middleware(request: NextRequest) {
     // TEMPORARILY DISABLED FOR TESTING - Remove this to enable authentication
     // Just allow all requests for now
-    return NextResponse.next();
+    // return NextResponse.next();
 
-    /* AUTHENTICATION CODE - ENABLE WHEN READY
+    //  AUTHENTICATION CODE - ENABLE WHEN READY
     const token = request.cookies.get('token')?.value;
     const { pathname } = request.nextUrl;
 
@@ -39,7 +39,7 @@ export function middleware(request: NextRequest) {
         }
 
         if (isProtectedApi && token) {
-            const decoded = verifyToken(token);
+            const decoded = verifyTokenEdge(token);
             if (!decoded) {
                 return NextResponse.json(
                     { error: 'Invalid token' },
@@ -55,7 +55,7 @@ export function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/login', request.url));
         }
 
-        const decoded = verifyToken(token);
+        const decoded = verifyTokenEdge(token);
         if (!decoded) {
             const response = NextResponse.redirect(new URL('/login', request.url));
             response.cookies.delete('token');
@@ -64,7 +64,7 @@ export function middleware(request: NextRequest) {
     }
 
     return NextResponse.next();
-    */
+
 }
 
 export const config = {

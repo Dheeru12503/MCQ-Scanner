@@ -8,9 +8,9 @@ export async function POST(request: NextRequest) {
     try {
         // TEMPORARILY DISABLED FOR TESTING
         const userId = getUserIdFromRequest(request) || 'test-user-id';
-        // if (!userId) {
-        //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-        // }
+        if (!userId) {
+          return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
 
         const formData = await request.formData();
         const file = formData.get('image') as File;
