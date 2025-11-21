@@ -7,9 +7,9 @@ export async function GET(request: NextRequest) {
     try {
         // TEMPORARILY DISABLED FOR TESTING
         const userId = getUserIdFromRequest(request) || 'test-user-id';
-        // if (!userId) {
-        //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-        // }
+        if (!userId) {
+          return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
 
         await connectDB();
 
